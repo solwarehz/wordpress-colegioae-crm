@@ -6,11 +6,12 @@
 defined('ABSPATH') || exit;
 
 $anchor = colegio_ae_get_section_anchor('nosotros');
-$title  = (string) get_theme_mod('colegio_ae_nosotros_title', 'Conoce el Colegio Albert Einstein');
-$p1     = (string) get_theme_mod('colegio_ae_nosotros_p1', '');
-$p2     = (string) get_theme_mod('colegio_ae_nosotros_p2', '');
-$video  = (string) get_theme_mod('colegio_ae_nosotros_video_url', '');
-$v_alt  = (string) get_theme_mod('colegio_ae_nosotros_video_title', 'Video institucional');
+$d      = colegio_ae_defaults();
+$title  = (string) get_theme_mod('colegio_ae_nosotros_title',       $d['nosotros_title']);
+$p1     = (string) get_theme_mod('colegio_ae_nosotros_p1',          $d['nosotros_p1']);
+$p2     = (string) get_theme_mod('colegio_ae_nosotros_p2',          $d['nosotros_p2']);
+$video  = (string) get_theme_mod('colegio_ae_nosotros_video_url',   $d['nosotros_video_url']);
+$v_alt  = (string) get_theme_mod('colegio_ae_nosotros_video_title', $d['nosotros_video_title']);
 
 /* Extraer video ID de cualquier URL de YouTube */
 $video_id = '';

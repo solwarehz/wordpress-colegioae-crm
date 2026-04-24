@@ -7,20 +7,21 @@ defined('ABSPATH') || exit;
 
 $anchor   = colegio_ae_get_section_anchor('hero');
 $autoplay = (int) get_theme_mod('colegio_ae_hero_autoplay', 6000);
+$defaults = colegio_ae_defaults()['hero_slides'];
 
-/* Construir slides desde theme_mods; solo los que tengan título o subtítulo */
 $slides = [];
 for ($i = 1; $i <= 5; $i++) {
-    $title    = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_title", '');
-    $subtitle = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_subtitle", '');
+    $d = $defaults[$i] ?? ['image' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''];
+    $title    = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_title",    $d['title']);
+    $subtitle = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_subtitle", $d['subtitle']);
     if ($title === '' && $subtitle === '') continue;
 
     $slides[] = [
-        'image'    => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_image", ''),
+        'image'    => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_image",    $d['image']),
         'title'    => $title,
         'subtitle' => $subtitle,
-        'cta_text' => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_cta_text", ''),
-        'cta_url'  => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_cta_url", ''),
+        'cta_text' => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_cta_text", $d['cta_text']),
+        'cta_url'  => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_cta_url",  $d['cta_url']),
     ];
 }
 if (empty($slides)) return;

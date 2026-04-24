@@ -16,14 +16,16 @@ defined('ABSPATH') || exit;
 
 $ae_customizer_dir = COLEGIO_AE_DIR . '/inc/customizer';
 
-/* 1) Helpers + registro de secciones */
+/* 1) Helpers + registro de secciones + defaults centralizados */
 require_once $ae_customizer_dir . '/helpers.php';
 require_once $ae_customizer_dir . '/sections-registry.php';
+require_once $ae_customizer_dir . '/defaults.php';
 
 /* 2) Custom controls (se requieren antes de customize_register) */
 add_action('customize_register', function () use ($ae_customizer_dir) {
     require_once $ae_customizer_dir . '/controls/class-eye-toggle.php';
     require_once $ae_customizer_dir . '/controls/class-sortable.php';
+    require_once $ae_customizer_dir . '/controls/class-multicheck.php';
 }, 1);
 
 /* 3) Paneles */
@@ -35,6 +37,11 @@ require_once $ae_customizer_dir . '/panel-hero.php';
 require_once $ae_customizer_dir . '/panel-nosotros.php';
 require_once $ae_customizer_dir . '/panel-valores.php';
 require_once $ae_customizer_dir . '/panel-servicios.php';
+require_once $ae_customizer_dir . '/panel-sedes.php';
+require_once $ae_customizer_dir . '/panel-profesores.php';
+require_once $ae_customizer_dir . '/panel-mentalidad.php';
+require_once $ae_customizer_dir . '/panel-resenas.php';
+require_once $ae_customizer_dir . '/panel-contacto.php';
 
 /* Output del CSS dinámico basado en theme_mods */
 require_once $ae_customizer_dir . '/output-css.php';

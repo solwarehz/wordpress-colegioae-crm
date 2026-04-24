@@ -56,11 +56,33 @@
     }
 
     /**
+     * Multicheck: sincroniza el input hidden con los checkboxes marcados.
+     */
+    function initMulticheck($root) {
+        $root.find('.colegio-ae-multicheck').each(function () {
+            var $wrap = $(this);
+            if ($wrap.data('ae-multicheck-ready')) return;
+
+            $wrap.on('change', '.colegio-ae-multicheck__checkbox', function () {
+                var slugs = $wrap.find('.colegio-ae-multicheck__checkbox:checked')
+                    .map(function () { return $(this).val(); })
+                    .get();
+                $wrap.find('.colegio-ae-multicheck__input')
+                    .val(slugs.join(','))
+                    .trigger('change');
+            });
+
+            $wrap.data('ae-multicheck-ready', true);
+        });
+    }
+
+    /**
      * Inicialización inicial + cuando se agregan controles dinámicamente.
      */
     $(function () {
         initSortable($(document));
         initEyeToggle($(document));
+        initMulticheck($(document));
     });
 
     // Customizer re-renderiza controles cuando cambias de sección; engancharse
@@ -71,6 +93,7 @@
                 control.deferred.embedded.done(function () {
                     initSortable(control.container);
                     initEyeToggle(control.container);
+                    initMulticheck(control.container);
                 });
             });
         });

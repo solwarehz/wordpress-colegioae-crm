@@ -6,8 +6,9 @@
 defined('ABSPATH') || exit;
 
 $anchor   = colegio_ae_get_section_anchor('valores');
-$title    = (string) get_theme_mod('colegio_ae_valores_title', 'Nuestros valores');
-$subtitle = (string) get_theme_mod('colegio_ae_valores_subtitle', '');
+$d        = colegio_ae_defaults();
+$title    = (string) get_theme_mod('colegio_ae_valores_title',    $d['valores_title']);
+$subtitle = (string) get_theme_mod('colegio_ae_valores_subtitle', $d['valores_subtitle']);
 
 $icons = [
     'handshake' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 17 9 19l-2-2-2 2-3-3 7-7 7 7 1 1-4 4-2-2Z"/><path d="M13 7 9 3l-1 1-2-2-3 3 4 4"/><path d="m14 14 3 3-2 2 3 3 3-3-7-7 3-3-1-1 4-4 3 3-4 4"/></svg>',
@@ -22,14 +23,16 @@ $icons = [
     'lightbulb' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.4 1 1.2 1 2V18h6v-1.3c0-.8.4-1.6 1-2A7 7 0 0 0 12 2z"/></svg>',
 ];
 
+$vd = $d['valores'];
 $valores = [];
 for ($i = 1; $i <= 6; $i++) {
-    $name = (string) get_theme_mod("colegio_ae_valor_{$i}_name", '');
+    $defv = $vd[$i] ?? ['name' => '', 'icon' => 'star', 'desc' => ''];
+    $name = (string) get_theme_mod("colegio_ae_valor_{$i}_name", $defv['name']);
     if ($name === '') continue;
     $valores[] = [
         'name' => $name,
-        'icon' => (string) get_theme_mod("colegio_ae_valor_{$i}_icon", 'star'),
-        'desc' => (string) get_theme_mod("colegio_ae_valor_{$i}_desc", ''),
+        'icon' => (string) get_theme_mod("colegio_ae_valor_{$i}_icon", $defv['icon']),
+        'desc' => (string) get_theme_mod("colegio_ae_valor_{$i}_desc", $defv['desc']),
     ];
 }
 if (empty($valores)) return;

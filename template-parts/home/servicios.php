@@ -6,19 +6,22 @@
 defined('ABSPATH') || exit;
 
 $anchor   = colegio_ae_get_section_anchor('servicios');
-$title    = (string) get_theme_mod('colegio_ae_servicios_title', 'Niveles educativos');
-$subtitle = (string) get_theme_mod('colegio_ae_servicios_subtitle', '');
+$d        = colegio_ae_defaults();
+$title    = (string) get_theme_mod('colegio_ae_servicios_title',    $d['servicios_title']);
+$subtitle = (string) get_theme_mod('colegio_ae_servicios_subtitle', $d['servicios_subtitle']);
 
+$nd = $d['niveles'];
 $niveles = [];
 for ($i = 1; $i <= 3; $i++) {
-    $name = (string) get_theme_mod("colegio_ae_nivel_{$i}_name", '');
+    $dn = $nd[$i] ?? ['name' => '', 'subtitle' => '', 'desc' => '', 'image' => '', 'link' => ''];
+    $name = (string) get_theme_mod("colegio_ae_nivel_{$i}_name", $dn['name']);
     if ($name === '') continue;
     $niveles[] = [
         'name'     => $name,
-        'subtitle' => (string) get_theme_mod("colegio_ae_nivel_{$i}_subtitle", ''),
-        'desc'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_desc", ''),
-        'image'    => (string) get_theme_mod("colegio_ae_nivel_{$i}_image", ''),
-        'link'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_link", ''),
+        'subtitle' => (string) get_theme_mod("colegio_ae_nivel_{$i}_subtitle", $dn['subtitle']),
+        'desc'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_desc",     $dn['desc']),
+        'image'    => (string) get_theme_mod("colegio_ae_nivel_{$i}_image",    $dn['image']),
+        'link'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_link",     $dn['link']),
     ];
 }
 if (empty($niveles)) return;

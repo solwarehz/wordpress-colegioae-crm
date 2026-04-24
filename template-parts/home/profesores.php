@@ -1,13 +1,22 @@
 <?php
 /**
- * Sección Profesores — carrusel auto-rotate de los últimos 5 profesores.
+ * template-parts/home/profesores.php — Carrusel de profesores destacados.
  */
 
 defined('ABSPATH') || exit;
 
+$anchor   = colegio_ae_get_section_anchor('profesores');
+$d        = colegio_ae_defaults();
+$title    = (string) get_theme_mod('colegio_ae_profesores_title',    $d['profesores_title']);
+$subtitle = (string) get_theme_mod('colegio_ae_profesores_subtitle', $d['profesores_subtitle']);
+$count    = max(3, min(10, (int) get_theme_mod('colegio_ae_profesores_count', 5)));
+$autoplay = max(3000, (int) get_theme_mod('colegio_ae_profesores_autoplay', 4500));
+$btn_text = (string) get_theme_mod('colegio_ae_profesores_btn_text', $d['profesores_btn_text']);
+$btn_url  = (string) get_theme_mod('colegio_ae_profesores_btn_url',  $d['profesores_btn_url']);
+
 $teachers = new WP_Query([
     'post_type'      => 'page',
-    'posts_per_page' => 5,
+    'posts_per_page' => $count,
     'orderby'        => 'date',
     'order'          => 'DESC',
     'meta_query'     => [
@@ -19,15 +28,17 @@ $teachers = new WP_Query([
 ]);
 ?>
 
-<section id="profesores" class="section profesores">
+<section id="<?php echo esc_attr($anchor); ?>" class="section profesores">
     <div class="container">
         <header class="profesores__header">
-            <h2 class="profesores__title"><?php esc_html_e('Nuestros profesores', 'colegio-ae'); ?></h2>
-            <p class="profesores__subtitle">Profesionales apasionados por enseñar, en formación constante, que creen que enseñar es acompañar a descubrir.</p>
+            <h2 class="profesores__title"><?php echo esc_html($title); ?></h2>
+            <?php if (!empty($subtitle)) : ?>
+                <p class="profesores__subtitle"><?php echo esc_html($subtitle); ?></p>
+            <?php endif; ?>
         </header>
 
         <?php if ($teachers->have_posts()) : ?>
-            <div class="profesores__carousel" data-profesor-carousel data-autoplay="4500" aria-roledescription="carousel">
+            <div class="profesores__carousel" data-profesor-carousel data-autoplay="<?php echo esc_attr($autoplay); ?>" aria-roledescription="carousel">
                 <button class="profesores__arrow profesores__arrow--prev" data-profesor-prev aria-label="<?php esc_attr_e('Profesor anterior', 'colegio-ae'); ?>" type="button">‹</button>
 
                 <div class="profesores__track">
@@ -51,13 +62,13 @@ $teachers = new WP_Query([
                 <button class="profesores__arrow profesores__arrow--next" data-profesor-next aria-label="<?php esc_attr_e('Siguiente profesor', 'colegio-ae'); ?>" type="button">›</button>
             </div>
 
-            <div class="profesores__footer">
-                <a href="<?php echo esc_url(home_url('/profesores/')); ?>" class="btn btn--secondary">
-                    <?php esc_html_e('Ver todos los profesores', 'colegio-ae'); ?>
-                </a>
-            </div>
+            <?php if (!empty($btn_text) && !empty($btn_url)) : ?>
+                <div class="profesores__footer">
+                    <a href="<?php echo esc_url($btn_url); ?>" class="btn btn--secondary"><?php echo esc_html($btn_text); ?></a>
+                </div>
+            <?php endif; ?>
         <?php else : ?>
-            <p class="profesores__empty">Los perfiles de nuestros profesores estarán disponibles próximamente.</p>
+            <p class="profesores__empty"><?php esc_html_e('Los perfiles de nuestros profesores estarán disponibles próximamente.', 'colegio-ae'); ?></p>
         <?php endif; ?>
 
         <?php wp_reset_postdata(); ?>
