@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.4.4');
+define('COLEGIO_AE_VERSION', '0.4.5');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -176,6 +176,24 @@ function colegio_ae_theme_init_inline() {
     <?php
 }
 add_action('wp_head', 'colegio_ae_theme_init_inline', 1);
+
+/**
+ * Oculta el email del autor de posts en cualquier output del frontend.
+ * Protege contra plugins o bloques Gutenberg que filtren el email del
+ * usuario administrador.
+ */
+function colegio_ae_hide_author_email_on_frontend($value, $field) {
+    if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+        return $value;
+    }
+    if ($field === 'user_email' || $field === 'email') {
+        return '';
+    }
+    return $value;
+}
+add_filter('get_the_author_user_email', function ($v) { return is_admin() ? $v : ''; });
+add_filter('get_the_author_email',      function ($v) { return is_admin() ? $v : ''; });
+add_filter('the_author_email',          function ($v) { return is_admin() ? $v : ''; });
 
 /**
  * Normaliza URLs de ítems de menú llamados "Inicio" o "Home":

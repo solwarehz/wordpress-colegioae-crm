@@ -313,6 +313,25 @@
     line-height: var(--lh-relaxed);
 }
 
+/* Defensa: ocultar bloques de autor que Gutenberg o plugins SEO inyectan
+   en el contenido del post. El colegio no firma posts individualmente. */
+.single-post__content .wp-block-post-author,
+.single-post__content .wp-block-post-author-name,
+.single-post__content .wp-block-post-author-biography,
+.single-post__content .wp-block-post-author-avatar,
+.single-post__content .wp-block-post-author-email,
+.single-post__content .byline,
+.single-post__content .author.vcard,
+.single-post__content .post-author,
+.single-post__content .author-info,
+.single-post__content .author-bio,
+.single-post__content .entry-meta .author,
+.single-post .author-box,
+.single-post .rank-math-author,
+.single-post .yoast-author-box {
+    display: none !important;
+}
+
 .single-post__content p {
     margin-bottom: var(--space-5);
 }
