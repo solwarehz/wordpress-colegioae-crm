@@ -1,0 +1,165 @@
+/* ============================================================================
+   footer.css
+   ============================================================================ */
+
+.site-footer {
+    background-color: var(--color-bg-alt);
+    color: var(--color-text);
+    margin-top: var(--space-12);
+    border-top: 1px solid var(--color-border);
+}
+
+.site-footer__columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-8);
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .site-footer__columns {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+}
+
+/* Columna 1 — Logo + texto */
+.site-footer__col--brand .site-footer__logo img {
+    max-height: 72px;
+    width: auto;
+    margin-bottom: var(--space-4);
+}
+
+/* Título de las columnas del footer */
+.site-footer__col-title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Ícono SUNAT inline con el link "Libro de reclamaciones" en el menú footer.
+   Detectado por URL — no requiere walker ni marcado extra en el menú. */
+.site-footer__menu a[href*="libro-de-reclamaciones"],
+.site-footer__menu a[href*="libro-reclamaciones"] {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.site-footer__menu a[href*="libro-de-reclamaciones"]::before,
+.site-footer__menu a[href*="libro-reclamaciones"]::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 36px;
+    flex-shrink: 0;
+    background-image: url('../../images/libro-reclamaciones-sunat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform var(--transition-fast);
+}
+
+.site-footer__menu a[href*="libro-de-reclamaciones"]:hover::before,
+.site-footer__menu a[href*="libro-reclamaciones"]:hover::before {
+    transform: scale(1.12);
+}
+
+.site-footer__tagline {
+    font-size: var(--fs-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--color-text-muted);
+    max-width: 36ch;
+}
+
+/* Columna 2 — Menú secundario */
+.site-footer__menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.site-footer__menu a {
+    font-family: var(--font-heading);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.site-footer__menu a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* Columna 3 — Redes sociales */
+.site-footer__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.site-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    transition: background-color var(--transition-fast),
+                color var(--transition-fast),
+                border-color var(--transition-fast),
+                transform var(--transition-fast);
+}
+
+.site-footer__social-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.site-footer__social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.site-footer__social-link--facebook:hover {
+    background-color: #1877f2;
+    border-color: #1877f2;
+}
+.site-footer__social-link--instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-color: transparent;
+}
+.site-footer__social-link--tiktok:hover {
+    background-color: #000000;
+    border-color: #000000;
+}
+.site-footer__social-link--youtube:hover {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+/* Barra inferior */
+.site-footer__bottom {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-4) 0;
+    background-color: var(--color-bg);
+}
+
+.site-footer__copyright {
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+}

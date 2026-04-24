@@ -1,0 +1,46 @@
+/* ============================================================================
+   fonts.css — Self-hosted webfonts
+   Descargar los archivos .woff2 desde https://gwfh.mranftl.com/
+   y colocarlos en assets/fonts/ con los nombres indicados abajo.
+   Mientras no existan los archivos, el navegador cae a la fuente de sistema.
+   ============================================================================ */
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/open-sans-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../fonts/open-sans-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/open-sans-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/roboto-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/roboto-700.woff2') format('woff2');
+}

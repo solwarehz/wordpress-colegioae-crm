@@ -1,0 +1,7 @@
+/* ============================================================================
+   main.css — Este archivo ya NO es el orquestador.
+   Los CSS se cargan individualmente vía wp_enqueue_style en functions.php
+   para que cada uno tenga su propio cache-busting (?ver=X.Y.Z).
+   Queda el archivo por compatibilidad, pero está vacío.
+   ============================================================================ */
+

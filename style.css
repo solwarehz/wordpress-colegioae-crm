@@ -1,0 +1,17 @@
+/*
+Theme Name: Colegio Albert Einstein
+Theme URI: https://github.com/solwarehz/wordpress-colegioae-crm
+Author: Solware
+Author URI: https://solware.com
+Description: Tema custom para el Colegio Albert Einstein de Huaraz. Parte del ecosistema CRM Solware. CSS puro, vanilla JS, sin build tool.
+Version: 0.1.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: colegio-ae
+Tags: custom, education, one-page, responsive, dark-mode
+*/
+
+/* Los estilos viven en assets/css/. Este archivo solo contiene metadatos. */
