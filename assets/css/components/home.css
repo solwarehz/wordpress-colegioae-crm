@@ -484,8 +484,9 @@
     grid-auto-columns: calc((100% - var(--space-5) * 3) / 4);  /* 4 cards visibles con gap */
     gap: var(--space-5);
     overflow-x: hidden;
+    overflow-y: hidden; /* evitar que CSS lo fuerce a 'auto' y aparezca scrollbar vertical */
     scroll-behavior: smooth;
-    padding-bottom: var(--space-3);
+    padding: var(--space-3) var(--space-2) var(--space-4);
 }
 
 .profesores__track .profesor-card {
