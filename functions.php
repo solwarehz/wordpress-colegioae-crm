@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.4.3');
+define('COLEGIO_AE_VERSION', '0.4.4');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -176,6 +176,36 @@ function colegio_ae_theme_init_inline() {
     <?php
 }
 add_action('wp_head', 'colegio_ae_theme_init_inline', 1);
+
+/**
+ * Normaliza URLs de ítems de menú llamados "Inicio" o "Home":
+ * si contienen un ancla vacía/rara (#, #home, #HOme, etc.) o apuntan a
+ * dominios localhost, se reemplazan por la home_url real del sitio.
+ *
+ * Evita que en producción un menú mal configurado deje al visitante en #.
+ */
+function colegio_ae_fix_home_menu_items($items, $args) {
+    $home = home_url('/');
+    foreach ($items as $item) {
+        $label = strtolower(trim($item->title));
+        if (in_array($label, ['inicio', 'home'], true)) {
+            $url = trim((string) $item->url);
+            $needs_fix = (
+                $url === '' ||
+                $url === '#' ||
+                strpos($url, '#') === 0 ||
+                strpos($url, 'localhost') !== false ||
+                strpos($url, '.test/') !== false ||
+                strpos($url, '.local/') !== false
+            );
+            if ($needs_fix) {
+                $item->url = $home;
+            }
+        }
+    }
+    return $items;
+}
+add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
 
 /**
  * Includes.
