@@ -5,11 +5,18 @@
 
 defined('ABSPATH') || exit;
 
+/**
+ * Solo trae posts de la categoría "Concursos".
+ * El cliente debe crear esa categoría en WP Admin → Entradas → Categorías
+ * y asignarla a los posts que quiera mostrar aquí. Los demás posts aparecen
+ * únicamente en la página del blog.
+ */
 $posts_query = new WP_Query([
     'post_type'      => 'post',
     'posts_per_page' => 5,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'category_name'  => 'concursos',
 ]);
 ?>
 
@@ -56,7 +63,14 @@ $posts_query = new WP_Query([
                 </div>
             </div>
         <?php else : ?>
-            <p class="mentalidad__empty">Pronto compartiremos nuestras historias y logros.</p>
+            <p class="mentalidad__empty">
+                <?php if (current_user_can('edit_posts')) : ?>
+                    <strong>Esta sección muestra artículos de la categoría «Concursos».</strong><br>
+                    Crea la categoría <code>concursos</code> en <em>Entradas → Categorías</em> y asígnala a los artículos que quieras destacar aquí.
+                <?php else : ?>
+                    Pronto compartiremos nuestras historias y logros.
+                <?php endif; ?>
+            </p>
         <?php endif; ?>
 
         <?php wp_reset_postdata(); ?>
