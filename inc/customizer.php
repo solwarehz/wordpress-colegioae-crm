@@ -26,8 +26,12 @@ add_action('customize_register', function () use ($ae_customizer_dir) {
     require_once $ae_customizer_dir . '/controls/class-sortable.php';
 }, 1);
 
-/* 3) Paneles (Sprint 2.0: solo "orden"; los demás se agregan en 2.1–2.4) */
+/* 3) Paneles */
 require_once $ae_customizer_dir . '/panel-orden.php';
+require_once $ae_customizer_dir . '/panel-global.php';
+
+/* Output del CSS dinámico basado en theme_mods del panel Global */
+require_once $ae_customizer_dir . '/output-css.php';
 
 /* Formularios (Tally) — panel temporal de Fase 1.
  * En Sprint 2.4 se movera a panel-contacto.php. Por ahora mantenemos el

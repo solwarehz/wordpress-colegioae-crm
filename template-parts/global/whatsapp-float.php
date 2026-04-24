@@ -1,14 +1,23 @@
 <?php
 /**
  * template-parts/global/whatsapp-float.php
- * Botón flotante de WhatsApp.
+ * Botón flotante de WhatsApp. Configuración via Customizer → Global.
  */
 
 defined('ABSPATH') || exit;
 
-$phone = '51981398282';
-$msg   = 'Hola, quisiera información del colegio';
-$url   = 'https://wa.me/' . $phone . '?text=' . rawurlencode($msg);
+$phone_raw = (string) get_theme_mod('colegio_ae_whatsapp_number', '981398282');
+$phone     = preg_replace('/[^0-9]/', '', $phone_raw);
+
+if ($phone === '') {
+    return; // Sin número configurado → no renderizar.
+}
+
+$message = (string) get_theme_mod('colegio_ae_whatsapp_message', 'Hola, quisiera información del colegio');
+
+// Anteponer código de país Perú si el número no lo incluye ya.
+$full_number = (strlen($phone) <= 9) ? ('51' . ltrim($phone, '0')) : $phone;
+$url         = 'https://wa.me/' . $full_number . '?text=' . rawurlencode($message);
 ?>
 
 <a
