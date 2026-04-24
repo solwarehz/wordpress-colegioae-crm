@@ -376,9 +376,21 @@ Funcionalidades del plugin (spec v1.1 sección 8):
 - Plugin CRM instalable como `.zip`
 - WhatsApp flotante, CTA "Contáctanos", copyright con año dinámico
 
-### Fase 2 — Personalización desde WP Admin
+### Fase 2 — Personalización desde WP Admin (✅ implementada)
 
-**Todo** el contenido de la página principal (home) + header + footer editable desde **Apariencia → Personalizar** (WordPress Customizer API), organizado en **paneles por sección** para que el cliente encuentre rápido lo que quiere editar sin tocar código ni entrar al Editor de páginas.
+**Todo** el contenido de la página principal (home) + header + footer editable desde **Apariencia → Personalizar** (WordPress Customizer API), organizado en **paneles por sección**.
+
+**Decisiones técnicas implementadas:**
+- ✅ Customizer **nativo** de WordPress, sin plugins externos
+- ✅ Repeaters como **campos numerados fijos** (Slide 1/2/3, Sede 1/2/3, etc.)
+- ✅ jQuery UI Sortable (incluido en WP core) para reordenar secciones
+- ✅ Custom Controls propios:
+  - `Colegio_AE_Eye_Toggle_Control` — visibility toggle con ojo
+  - `Colegio_AE_Sortable_Control` — drag-and-drop list
+  - `Colegio_AE_Multicheck_Control` — checkboxes múltiples
+- ✅ `selective_refresh` + `postMessage` para edición instantánea sin recarga
+- ✅ Defaults centralizados en `inc/customizer/defaults.php` (fuente única de verdad para panel + frontend)
+- ✅ Custom CSS dinámico con CSS variables vía `wp_add_inline_style`
 
 **Paneles del Customizer (uno por sección):**
 

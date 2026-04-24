@@ -46,6 +46,9 @@ require_once $ae_customizer_dir . '/panel-contacto.php';
 /* Output del CSS dinámico basado en theme_mods */
 require_once $ae_customizer_dir . '/output-css.php';
 
+/* Selective refresh + postMessage transport (preview en vivo) */
+require_once $ae_customizer_dir . '/selective-refresh.php';
+
 /* Formularios (Tally) — panel temporal de Fase 1.
  * En Sprint 2.4 se movera a panel-contacto.php. Por ahora mantenemos el
  * código original para no romper nada. */
@@ -131,6 +134,19 @@ function colegio_ae_enqueue_customizer_assets() {
         'colegio-ae-customizer',
         COLEGIO_AE_URI . '/assets/js/admin/customizer.js',
         ['jquery', 'jquery-ui-sortable', 'customize-controls'],
+        COLEGIO_AE_VERSION,
+        true
+    );
+}
+
+/* Preview JS para actualizaciones live de texto via postMessage */
+add_action('customize_preview_init', 'colegio_ae_enqueue_customizer_preview');
+
+function colegio_ae_enqueue_customizer_preview() {
+    wp_enqueue_script(
+        'colegio-ae-customizer-preview',
+        COLEGIO_AE_URI . '/assets/js/admin/customizer-preview.js',
+        ['jquery', 'customize-preview'],
         COLEGIO_AE_VERSION,
         true
     );
