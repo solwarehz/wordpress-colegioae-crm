@@ -27,8 +27,6 @@ get_header();
 
                     <div class="single-post__meta">
                         <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
-                        <span class="single-post__dot" aria-hidden="true">·</span>
-                        <span><?php echo esc_html(get_the_author()); ?></span>
                     </div>
                 </div>
             </header>
