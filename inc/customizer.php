@@ -31,6 +31,10 @@ require_once $ae_customizer_dir . '/panel-orden.php';
 require_once $ae_customizer_dir . '/panel-global.php';
 require_once $ae_customizer_dir . '/panel-header.php';
 require_once $ae_customizer_dir . '/panel-footer.php';
+require_once $ae_customizer_dir . '/panel-hero.php';
+require_once $ae_customizer_dir . '/panel-nosotros.php';
+require_once $ae_customizer_dir . '/panel-valores.php';
+require_once $ae_customizer_dir . '/panel-servicios.php';
 
 /* Output del CSS dinámico basado en theme_mods */
 require_once $ae_customizer_dir . '/output-css.php';

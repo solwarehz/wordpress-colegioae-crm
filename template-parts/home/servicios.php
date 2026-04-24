@@ -1,51 +1,59 @@
 <?php
 /**
- * Sección Servicios — niveles educativos
+ * template-parts/home/servicios.php — Sección Niveles educativos.
  */
 
 defined('ABSPATH') || exit;
 
-$niveles = [
-    [
-        'name'     => 'Inicial',
-        'subtitle' => '3 a 5 años',
-        'desc'     => 'Los primeros años marcan el resto de la vida escolar. En nuestro nivel Inicial, los niños aprenden a través del juego, el movimiento y la exploración, en un ambiente seguro que estimula su curiosidad y desarrolla sus habilidades sociales, emocionales y cognitivas.',
-        'image'    => 'https://picsum.photos/seed/ae-servicios-inicial/800/600',
-    ],
-    [
-        'name'     => 'Primaria',
-        'subtitle' => '1° a 6° grado',
-        'desc'     => 'Construimos las bases del pensamiento crítico. Nuestros estudiantes no memorizan: comprenden, cuestionan y aplican. Desarrollamos hábitos de estudio, lectura comprensiva, razonamiento matemático y una sólida formación en valores.',
-        'image'    => 'https://picsum.photos/seed/ae-servicios-primaria/800/600',
-    ],
-    [
-        'name'     => 'Secundaria',
-        'subtitle' => '1° a 5° año',
-        'desc'     => 'Preparamos jóvenes listos para la universidad y para la vida. Formación académica rigurosa, orientación vocacional, proyectos de liderazgo y participación en concursos que los retan a dar lo mejor de sí.',
-        'image'    => 'https://picsum.photos/seed/ae-servicios-secundaria/800/600',
-    ],
-];
+$anchor   = colegio_ae_get_section_anchor('servicios');
+$title    = (string) get_theme_mod('colegio_ae_servicios_title', 'Niveles educativos');
+$subtitle = (string) get_theme_mod('colegio_ae_servicios_subtitle', '');
+
+$niveles = [];
+for ($i = 1; $i <= 3; $i++) {
+    $name = (string) get_theme_mod("colegio_ae_nivel_{$i}_name", '');
+    if ($name === '') continue;
+    $niveles[] = [
+        'name'     => $name,
+        'subtitle' => (string) get_theme_mod("colegio_ae_nivel_{$i}_subtitle", ''),
+        'desc'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_desc", ''),
+        'image'    => (string) get_theme_mod("colegio_ae_nivel_{$i}_image", ''),
+        'link'     => (string) get_theme_mod("colegio_ae_nivel_{$i}_link", ''),
+    ];
+}
+if (empty($niveles)) return;
 ?>
 
-<section id="servicios" class="section servicios">
+<section id="<?php echo esc_attr($anchor); ?>" class="section servicios">
     <div class="container">
         <header class="servicios__header">
-            <h2 class="servicios__title"><?php esc_html_e('Niveles educativos', 'colegio-ae'); ?></h2>
-            <p class="servicios__subtitle">Acompañamos a tu hijo desde los primeros años hasta la universidad.</p>
+            <h2 class="servicios__title"><?php echo esc_html($title); ?></h2>
+            <?php if (!empty($subtitle)) : ?>
+                <p class="servicios__subtitle"><?php echo esc_html($subtitle); ?></p>
+            <?php endif; ?>
         </header>
 
         <div class="servicios__grid">
-            <?php foreach ($niveles as $nivel) : ?>
-                <article class="nivel-card">
-                    <div class="nivel-card__image card-image">
-                        <img src="<?php echo esc_url($nivel['image']); ?>" alt="<?php echo esc_attr('Nivel ' . $nivel['name']); ?>" loading="lazy">
-                    </div>
+            <?php foreach ($niveles as $n) :
+                $tag = !empty($n['link']) ? 'a' : 'article';
+                $href_attr = !empty($n['link']) ? ' href="' . esc_url($n['link']) . '"' : '';
+            ?>
+                <<?php echo $tag; ?> class="nivel-card"<?php echo $href_attr; ?>>
+                    <?php if (!empty($n['image'])) : ?>
+                        <div class="nivel-card__image card-image">
+                            <img src="<?php echo esc_url($n['image']); ?>" alt="<?php echo esc_attr('Nivel ' . $n['name']); ?>" loading="lazy">
+                        </div>
+                    <?php endif; ?>
                     <div class="nivel-card__body">
-                        <h3 class="nivel-card__name"><?php echo esc_html($nivel['name']); ?></h3>
-                        <p class="nivel-card__subtitle"><?php echo esc_html($nivel['subtitle']); ?></p>
-                        <p class="nivel-card__desc"><?php echo esc_html($nivel['desc']); ?></p>
+                        <h3 class="nivel-card__name"><?php echo esc_html($n['name']); ?></h3>
+                        <?php if (!empty($n['subtitle'])) : ?>
+                            <p class="nivel-card__subtitle"><?php echo esc_html($n['subtitle']); ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($n['desc'])) : ?>
+                            <p class="nivel-card__desc"><?php echo esc_html($n['desc']); ?></p>
+                        <?php endif; ?>
                     </div>
-                </article>
+                </<?php echo $tag; ?>>
             <?php endforeach; ?>
         </div>
     </div>
