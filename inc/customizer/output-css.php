@@ -68,6 +68,28 @@ function colegio_ae_build_customizer_css() {
         $overrides[] = '--color-accent-gold: ' . $gold . ';';
     }
 
+    /* -------- Header / CTA -------- */
+    $menu_size = (int) get_theme_mod('colegio_ae_menu_font_size', 16);
+    $menu_size = max(14, min(22, $menu_size));
+    $overrides[] = '--menu-font-size: ' . $menu_size . 'px;';
+
+    $cta_bg    = (string) get_theme_mod('colegio_ae_cta_bg', '');
+    $cta_color = (string) get_theme_mod('colegio_ae_cta_color', '#ffffff');
+    if (!empty($cta_bg)) {
+        $overrides[] = '--color-cta-bg: ' . $cta_bg . ';';
+        $overrides[] = '--color-cta-bg-hover: ' . colegio_ae_darken_hex($cta_bg, 12) . ';';
+    }
+    if (!empty($cta_color)) {
+        $overrides[] = '--color-cta-text: ' . $cta_color . ';';
+    }
+
+    /* -------- Footer / SUNAT -------- */
+    $sunat_url = (string) get_theme_mod('colegio_ae_sunat_image', '');
+    if (empty($sunat_url)) {
+        $sunat_url = COLEGIO_AE_URI . '/assets/images/libro-reclamaciones-sunat.png';
+    }
+    $overrides[] = "--sunat-img: url('" . esc_url($sunat_url) . "');";
+
     if (empty($overrides)) {
         return '';
     }

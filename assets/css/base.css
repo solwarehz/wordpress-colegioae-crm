@@ -135,16 +135,16 @@ a:hover {
 }
 
 .btn--primary {
-    background-color: var(--color-primary);
-    color: #ffffff;
-    border-color: var(--color-primary);
+    background-color: var(--color-cta-bg, var(--color-primary));
+    color: var(--color-cta-text, #ffffff);
+    border-color: var(--color-cta-bg, var(--color-primary));
     box-shadow: 0 2px 8px rgba(0, 74, 173, 0.25);
 }
 
 .btn--primary:hover {
-    background-color: var(--color-secondary);
-    border-color: var(--color-secondary);
-    color: #ffffff;
+    background-color: var(--color-cta-bg-hover, var(--color-secondary));
+    border-color: var(--color-cta-bg-hover, var(--color-secondary));
+    color: var(--color-cta-text, #ffffff);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(1, 173, 237, 0.35);
 }

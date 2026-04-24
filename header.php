@@ -4,6 +4,15 @@
  */
 
 defined('ABSPATH') || exit;
+
+/* Valores del Customizer (Header) */
+$ae_logo_alt     = (string) get_theme_mod('colegio_ae_header_logo_alt', '');
+$ae_cta_text     = (string) get_theme_mod('colegio_ae_cta_text', 'Contáctanos');
+$ae_cta_href_raw = (string) get_theme_mod('colegio_ae_cta_href', '#contacto');
+$ae_cta_href     = (strpos($ae_cta_href_raw, '#') === 0)
+    ? home_url('/' . $ae_cta_href_raw)
+    : $ae_cta_href_raw;
+$ae_show_toggle  = (bool) get_theme_mod('colegio_ae_show_theme_toggle', 1);
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -22,7 +31,16 @@ defined('ABSPATH') || exit;
         <div class="site-header__brand">
             <?php if (has_custom_logo()) : ?>
                 <div class="site-header__logo site-header__logo--desktop">
-                    <?php the_custom_logo(); ?>
+                    <?php
+                    if (!empty($ae_logo_alt)) {
+                        // Custom alt via filter
+                        add_filter('get_custom_logo_image_attributes', function ($attrs) use ($ae_logo_alt) {
+                            $attrs['alt'] = $ae_logo_alt;
+                            return $attrs;
+                        });
+                    }
+                    the_custom_logo();
+                    ?>
                 </div>
                 <a class="site-header__site-name site-header__site-name--mobile" href="<?php echo esc_url(home_url('/')); ?>">
                     <?php bloginfo('name'); ?>
@@ -53,22 +71,24 @@ defined('ABSPATH') || exit;
         </nav>
 
         <div class="site-header__actions">
-            <div class="site-header__tools" data-tools>
-                <button class="site-header__tools-toggle" type="button" aria-expanded="false" aria-controls="header-tools-tray" aria-label="<?php esc_attr_e('Mostrar opciones', 'colegio-ae'); ?>">
-                    <svg class="site-header__tools-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="6 9 12 15 18 9"/>
-                    </svg>
-                </button>
-                <div class="site-header__tools-tray" id="header-tools-tray" role="group" aria-label="<?php esc_attr_e('Preferencias', 'colegio-ae'); ?>">
-                    <button class="theme-toggle" type="button" aria-label="<?php esc_attr_e('Cambiar tema claro/oscuro', 'colegio-ae'); ?>">
-                        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀</span>
-                        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">☾</span>
+            <?php if ($ae_show_toggle) : ?>
+                <div class="site-header__tools" data-tools>
+                    <button class="site-header__tools-toggle" type="button" aria-expanded="false" aria-controls="header-tools-tray" aria-label="<?php esc_attr_e('Mostrar opciones', 'colegio-ae'); ?>">
+                        <svg class="site-header__tools-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
                     </button>
+                    <div class="site-header__tools-tray" id="header-tools-tray" role="group" aria-label="<?php esc_attr_e('Preferencias', 'colegio-ae'); ?>">
+                        <button class="theme-toggle" type="button" aria-label="<?php esc_attr_e('Cambiar tema claro/oscuro', 'colegio-ae'); ?>">
+                            <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀</span>
+                            <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">☾</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
-            <a class="btn btn--primary site-header__cta" href="<?php echo esc_url(home_url('/#contacto')); ?>">
-                <?php esc_html_e('Contáctanos', 'colegio-ae'); ?>
+            <a class="btn btn--primary site-header__cta" href="<?php echo esc_url($ae_cta_href); ?>">
+                <?php echo esc_html($ae_cta_text); ?>
             </a>
         </div>
     </div>

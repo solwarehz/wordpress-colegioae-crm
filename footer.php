@@ -4,22 +4,35 @@
  */
 
 defined('ABSPATH') || exit;
+
+/* Valores del Customizer (Footer) */
+$ae_footer_logo    = (string) get_theme_mod('colegio_ae_footer_logo', '');
+$ae_footer_tagline = (string) get_theme_mod('colegio_ae_footer_tagline', __('Formamos estudiantes líderes con pensamiento crítico, valores sólidos y visión global. Huaraz, Perú.', 'colegio-ae'));
+$ae_col2_title     = (string) get_theme_mod('colegio_ae_footer_col2_title', __('Links de interés', 'colegio-ae'));
+$ae_col3_title     = (string) get_theme_mod('colegio_ae_footer_col3_title', __('Síguenos en:', 'colegio-ae'));
+$ae_copyright      = (string) get_theme_mod('colegio_ae_footer_copyright', __('Colegio Albert Einstein. Todos los derechos reservados.', 'colegio-ae'));
 ?>
 
 <footer class="site-footer" role="contentinfo">
     <div class="container site-footer__columns">
 
         <div class="site-footer__col site-footer__col--brand">
-            <?php if (has_custom_logo()) : ?>
+            <?php if (!empty($ae_footer_logo)) : ?>
+                <div class="site-footer__logo">
+                    <a href="<?php echo esc_url(home_url('/')); ?>">
+                        <img src="<?php echo esc_url($ae_footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" loading="lazy">
+                    </a>
+                </div>
+            <?php elseif (has_custom_logo()) : ?>
                 <div class="site-footer__logo"><?php the_custom_logo(); ?></div>
             <?php endif; ?>
-            <p class="site-footer__tagline">
-                <?php esc_html_e('Formamos estudiantes líderes con pensamiento crítico, valores sólidos y visión global. Huaraz, Perú.', 'colegio-ae'); ?>
-            </p>
+            <?php if (!empty($ae_footer_tagline)) : ?>
+                <p class="site-footer__tagline"><?php echo esc_html($ae_footer_tagline); ?></p>
+            <?php endif; ?>
         </div>
 
-        <nav class="site-footer__col site-footer__col--nav" aria-label="<?php esc_attr_e('Menú secundario', 'colegio-ae'); ?>">
-            <h3 class="site-footer__col-title"><?php esc_html_e('Links de interés', 'colegio-ae'); ?></h3>
+        <nav class="site-footer__col site-footer__col--nav" aria-label="<?php echo esc_attr($ae_col2_title); ?>">
+            <h3 class="site-footer__col-title"><?php echo esc_html($ae_col2_title); ?></h3>
             <?php
             wp_nav_menu([
                 'theme_location' => 'menu-secundario',
@@ -30,8 +43,8 @@ defined('ABSPATH') || exit;
             ?>
         </nav>
 
-        <nav class="site-footer__col site-footer__col--social" aria-label="<?php esc_attr_e('Redes sociales', 'colegio-ae'); ?>">
-            <h3 class="site-footer__col-title"><?php esc_html_e('Síguenos en:', 'colegio-ae'); ?></h3>
+        <nav class="site-footer__col site-footer__col--social" aria-label="<?php echo esc_attr($ae_col3_title); ?>">
+            <h3 class="site-footer__col-title"><?php echo esc_html($ae_col3_title); ?></h3>
             <?php
             wp_nav_menu([
                 'theme_location' => 'menu-redes-sociales',
@@ -48,8 +61,7 @@ defined('ABSPATH') || exit;
     <div class="site-footer__bottom">
         <div class="container">
             <p class="site-footer__copyright">
-                &copy; <?php echo esc_html(date('Y')); ?> <?php bloginfo('name'); ?>.
-                <?php esc_html_e('Todos los derechos reservados.', 'colegio-ae'); ?>
+                &copy; <?php echo esc_html(date('Y')); ?> <?php echo esc_html($ae_copyright); ?>
             </p>
         </div>
     </div>

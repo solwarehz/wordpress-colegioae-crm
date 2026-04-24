@@ -59,7 +59,7 @@
     width: 28px;
     height: 36px;
     flex-shrink: 0;
-    background-image: url('../../images/libro-reclamaciones-sunat.png');
+    background-image: var(--sunat-img, url('../../images/libro-reclamaciones-sunat.png'));
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

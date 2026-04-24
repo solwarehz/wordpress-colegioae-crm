@@ -29,8 +29,10 @@ add_action('customize_register', function () use ($ae_customizer_dir) {
 /* 3) Paneles */
 require_once $ae_customizer_dir . '/panel-orden.php';
 require_once $ae_customizer_dir . '/panel-global.php';
+require_once $ae_customizer_dir . '/panel-header.php';
+require_once $ae_customizer_dir . '/panel-footer.php';
 
-/* Output del CSS dinámico basado en theme_mods del panel Global */
+/* Output del CSS dinámico basado en theme_mods */
 require_once $ae_customizer_dir . '/output-css.php';
 
 /* Formularios (Tally) — panel temporal de Fase 1.
