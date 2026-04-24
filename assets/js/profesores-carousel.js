@@ -42,6 +42,8 @@
 
             var cardWidth = cards[0].getBoundingClientRect().width;
             var gap = parseFloat(getComputedStyle(track).columnGap || 16);
+            // En móvil con peek, el target del scroll no es cardWidth completo
+            // — scroll-snap-align: center lo alinea; forzamos el mismo cálculo.
             track.scrollTo({ left: current * (cardWidth + gap), behavior: 'smooth' });
         }
 

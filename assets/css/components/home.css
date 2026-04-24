@@ -454,6 +454,30 @@
     }
 }
 
+/* Móvil: las fotos de las sedes se apilan en columna.
+   Se liberan de la altura uniforme (180px) y recuperan su aspect-ratio
+   original para que se vean grandes y verticales. La altura dispareja de
+   los cards de sede en móvil es aceptable — prioridad: ver bien las fotos. */
+@media (max-width: 640px) {
+    .sede-block,
+    .sede-block--right {
+        min-height: 0;
+    }
+
+    .sede-block__gallery,
+    .sede-block__gallery[data-niveles="1"],
+    .sede-block__gallery[data-niveles="2"],
+    .sede-block__gallery[data-niveles="3"] {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .sede-block__photo .card-image {
+        aspect-ratio: 4 / 3;
+        height: auto;
+    }
+}
+
 /* -------- Profesores (home) -------- */
 .profesores__header {
     text-align: center;
@@ -529,10 +553,25 @@
     .profesores__track { grid-auto-columns: calc((100% - var(--space-5)) / 2); }
 }
 @media (max-width: 480px) {
-    .profesores__track { grid-auto-columns: 100%; }
-    .profesores__carousel { padding: 0 8px; }
-    .profesores__arrow--prev { left: -8px; }
-    .profesores__arrow--next { right: -8px; }
+    /* Peek lateral: la card activa está centrada y se ve parte de la anterior
+       y la siguiente, indicando visualmente que hay más cards a los lados. */
+    .profesores__carousel { padding: 0; }
+    .profesores__track {
+        grid-auto-columns: 80%;
+        padding: var(--space-3) 10% var(--space-4);
+        gap: var(--space-3);
+        scroll-snap-type: x mandatory;
+    }
+    .profesores__track .profesor-card {
+        scroll-snap-align: center;
+    }
+    /* Flechas superpuestas sobre las cards peek, con fondo semi-transparente */
+    .profesores__arrow {
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow-sm);
+    }
+    .profesores__arrow--prev { left: 4px; }
+    .profesores__arrow--next { right: 4px; }
 }
 
 .profesor-card__link {
