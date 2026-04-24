@@ -115,6 +115,20 @@ function colegio_ae_defaults() {
             ],
         ],
 
+        /* -------- Documentos (página) -------- */
+        'documentos' => [
+            1  => ['enabled' => 1, 'title' => 'Reglamento Interno 2026',  'desc' => 'Normas de convivencia, derechos y deberes.',         'file' => 0],
+            2  => ['enabled' => 1, 'title' => 'Calendario Académico',     'desc' => 'Fechas clave del año escolar.',                       'file' => 0],
+            3  => ['enabled' => 1, 'title' => 'Cronograma de Matrículas', 'desc' => 'Fechas y requisitos para nueva inscripción.',        'file' => 0],
+            4  => ['enabled' => 1, 'title' => 'Ideario Institucional',    'desc' => 'Misión, visión y principios del colegio.',           'file' => 0],
+            5  => ['enabled' => 1, 'title' => 'Plan de Estudios',         'desc' => 'Contenidos curriculares por nivel.',                  'file' => 0],
+            6  => ['enabled' => 0, 'title' => '', 'desc' => '', 'file' => 0],
+            7  => ['enabled' => 0, 'title' => '', 'desc' => '', 'file' => 0],
+            8  => ['enabled' => 0, 'title' => '', 'desc' => '', 'file' => 0],
+            9  => ['enabled' => 0, 'title' => '', 'desc' => '', 'file' => 0],
+            10 => ['enabled' => 0, 'title' => '', 'desc' => '', 'file' => 0],
+        ],
+
         /* -------- Textos simples -------- */
         'nosotros_title' => 'Conoce el Colegio Albert Einstein',
         'nosotros_p1'    => 'En Huaraz formamos estudiantes líderes con pensamiento crítico, valores sólidos y visión global, capaces de transformar su entorno con compromiso, innovación y excelencia académica.',

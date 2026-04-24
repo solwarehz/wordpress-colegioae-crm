@@ -595,6 +595,26 @@
     padding: var(--space-2) var(--space-4);
 }
 
+.documento-item__cta--disabled {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+    font-style: italic;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.documentos-page__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--space-10) var(--space-5);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--color-border);
+}
+
 .documentos-page__note {
     text-align: center;
     color: var(--color-text-muted);

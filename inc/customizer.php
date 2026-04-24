@@ -42,6 +42,7 @@ require_once $ae_customizer_dir . '/panel-profesores.php';
 require_once $ae_customizer_dir . '/panel-mentalidad.php';
 require_once $ae_customizer_dir . '/panel-resenas.php';
 require_once $ae_customizer_dir . '/panel-contacto.php';
+require_once $ae_customizer_dir . '/panel-documentos.php';
 
 /* Output del CSS dinámico basado en theme_mods */
 require_once $ae_customizer_dir . '/output-css.php';
