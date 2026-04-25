@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.8.7');
+define('COLEGIO_AE_VERSION', '0.9.0');
 
 /**
  * COLEGIO_AE_DIR / COLEGIO_AE_URI apuntan al directorio del tema padre
@@ -156,6 +156,18 @@ function colegio_ae_enqueue_assets() {
         wp_enqueue_style(
             'colegio-ae-pages',
             COLEGIO_AE_URI . '/assets/css/components/pages.css',
+            ['colegio-ae-base'],
+            COLEGIO_AE_VERSION
+        );
+    }
+
+    // CSS de la landing de Admisión — solo cuando esta página activa
+    // el template. Layout sin distractores, banner full-width, form
+    // centrado.
+    if (is_page_template('page-templates/page-admision.php')) {
+        wp_enqueue_style(
+            'colegio-ae-admision',
+            COLEGIO_AE_URI . '/assets/css/components/admision.css',
             ['colegio-ae-base'],
             COLEGIO_AE_VERSION
         );
