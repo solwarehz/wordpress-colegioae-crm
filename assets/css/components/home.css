@@ -3,13 +3,24 @@
    Cargado solo en la front-page vía enqueue condicional en functions.php.
    ============================================================================ */
 
+/* -------- Zebra pattern por posición --------
+   El sombreado gris/blanco alterna según la posición que ocupa cada sección
+   dentro de <main>. Así, al reordenar secciones desde el Customizer, dos
+   secciones grises nunca quedan adyacentes. Las secciones desactivadas no se
+   renderizan, por lo que :nth-child cuenta solo las visibles. */
+.site-main--home > section:nth-child(odd) {
+    background: var(--color-bg-alt);
+}
+.site-main--home > section:nth-child(even) {
+    background: var(--color-bg);
+}
+
 /* -------- Hero -------- */
 .hero {
     position: relative;
     overflow: hidden;
     min-height: 60vh;
     max-height: 720px;
-    background: var(--color-bg-alt);
 }
 
 .hero__slider {
@@ -181,10 +192,6 @@
 }
 
 /* -------- Valores -------- */
-.valores {
-    background: var(--color-bg-alt);
-}
-
 .valores__header {
     text-align: center;
     margin-bottom: var(--space-8);
@@ -322,10 +329,6 @@
 }
 
 /* -------- Sedes -------- */
-.sedes {
-    background: var(--color-bg-alt);
-}
-
 .sedes__header {
     text-align: center;
     margin-bottom: var(--space-10);
@@ -625,7 +628,6 @@
 
 /* -------- Mentalidad ganadora -------- */
 .mentalidad {
-    background: var(--color-bg-alt);
     overflow: hidden;
 }
 
@@ -892,10 +894,6 @@
 }
 
 /* -------- Contacto -------- */
-.contacto {
-    background: var(--color-bg-alt);
-}
-
 .contacto__header {
     text-align: center;
     margin-bottom: var(--space-8);
