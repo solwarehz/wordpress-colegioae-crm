@@ -42,11 +42,29 @@ $ae_show_toggle  = (bool) get_theme_mod('colegio_ae_show_theme_toggle', 1);
                     the_custom_logo();
                     ?>
                 </div>
-                <a class="site-header__site-name site-header__site-name--mobile" href="<?php echo esc_url(home_url('/')); ?>">
-                    <?php bloginfo('name'); ?>
+            <?php endif; ?>
+
+            <?php if (has_site_icon()) : ?>
+                <?php
+                // Si hay logo, el icon solo aparece en mobile (clase modificadora).
+                // Si no hay logo, el icon se ve en todos los tamaños.
+                $icon_modifier = has_custom_logo() ? ' site-header__icon--mobile' : '';
+                ?>
+                <a href="<?php echo esc_url(home_url('/')); ?>"
+                   class="site-header__icon<?php echo $icon_modifier; ?>"
+                   aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                    <img src="<?php echo esc_url(get_site_icon_url(96)); ?>"
+                         alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+                         width="48" height="48"
+                         loading="eager" decoding="async">
                 </a>
             <?php else : ?>
-                <a class="site-header__site-name" href="<?php echo esc_url(home_url('/')); ?>">
+                <?php
+                // Sin site icon — fallback al nombre del sitio. Si hay logo,
+                // el nombre solo se muestra en mobile como fallback (truncado por CSS).
+                $name_modifier = has_custom_logo() ? ' site-header__site-name--mobile' : '';
+                ?>
+                <a class="site-header__site-name<?php echo $name_modifier; ?>" href="<?php echo esc_url(home_url('/')); ?>">
                     <?php bloginfo('name'); ?>
                 </a>
             <?php endif; ?>

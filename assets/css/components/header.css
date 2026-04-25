@@ -77,12 +77,50 @@
     display: none;
 }
 
+/* Site Icon (favicon de WP usado como brand mobile) */
+.site-header__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
+    transition: transform var(--transition-fast);
+}
+
+.site-header__icon:hover {
+    transform: scale(1.05);
+}
+
+.site-header__icon img {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Cuando convive con un logo, el icon solo aparece en mobile */
+.site-header__icon--mobile {
+    display: none;
+}
+
 @media (max-width: 767px) {
     .site-header__logo--desktop {
         display: none;
     }
+    .site-header__icon--mobile {
+        display: inline-flex;
+    }
+    /* Fallback al nombre del sitio en mobile cuando no hay site icon.
+       Truncado para que un nombre largo nunca rompa el diseño. */
     .site-header__site-name--mobile {
         display: inline-block;
+        max-width: 55vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--fs-base);
     }
 }
 
