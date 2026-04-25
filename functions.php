@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.7.2');
+define('COLEGIO_AE_VERSION', '0.8.0');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -262,5 +262,6 @@ add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
 require_once COLEGIO_AE_DIR . '/inc/social-nav-walker.php';
 require_once COLEGIO_AE_DIR . '/inc/disable-comments.php';
 require_once COLEGIO_AE_DIR . '/inc/cache.php';
+require_once COLEGIO_AE_DIR . '/inc/headers.php';
 require_once COLEGIO_AE_DIR . '/inc/seo.php';
 require_once COLEGIO_AE_DIR . '/inc/customizer.php';
