@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.9.2');
+define('COLEGIO_AE_VERSION', '0.9.3');
 
 /**
  * COLEGIO_AE_DIR / COLEGIO_AE_URI apuntan al directorio del tema padre

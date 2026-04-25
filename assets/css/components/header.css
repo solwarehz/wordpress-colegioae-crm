@@ -288,12 +288,35 @@
 @media (max-width: 1023px) {
     .site-nav__toggle {
         display: inline-flex;
-        order: -1;
     }
 
     .site-nav {
         justify-content: flex-start;
         flex: 0 0 auto;
+    }
+
+    /* Reorganización del header en mobile/tablet:
+       [brand] ... [CTA] [theme toggle] [hamburguesa]
+
+       Trick: display:contents en .site-header__actions promueve sus
+       hijos (tools + CTA) al flex container principal, permitiendo
+       ordenarlos individualmente junto a .site-nav (la hamburguesa).
+       Soporte universal en navegadores modernos. */
+    .site-header__actions {
+        display: contents;
+    }
+    .site-header__brand {
+        margin-right: auto; /* empuja el resto al borde derecho */
+    }
+    .site-header__cta {
+        order: 2;
+    }
+    .site-header__tools {
+        order: 3; /* theme toggle justo antes del hamburguesa */
+    }
+    .site-nav {
+        order: 4; /* hamburguesa al final, extremo derecho */
+        margin-left: 0;
     }
 
     .site-nav__list {
