@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.5.2');
+define('COLEGIO_AE_VERSION', '0.5.3');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -20,8 +20,6 @@ function colegio_ae_setup() {
     add_theme_support('post-thumbnails');
     add_theme_support('html5', [
         'search-form',
-        'comment-form',
-        'comment-list',
         'gallery',
         'caption',
         'style',
@@ -229,4 +227,5 @@ add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
  * Includes.
  */
 require_once COLEGIO_AE_DIR . '/inc/social-nav-walker.php';
+require_once COLEGIO_AE_DIR . '/inc/disable-comments.php';
 require_once COLEGIO_AE_DIR . '/inc/customizer.php';

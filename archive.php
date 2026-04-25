@@ -17,13 +17,13 @@ $tags = get_tags(['hide_empty' => true]);
             <h1 class="blog-archive__title">
                 <?php
                 if (is_category()) {
-                    single_cat_title('Categoría: ');
+                    echo esc_html('Categoría: ' . single_cat_title('', false));
                 } elseif (is_tag()) {
-                    single_tag_title('Etiqueta: ');
+                    echo esc_html('Etiqueta: ' . single_tag_title('', false));
                 } elseif (is_author()) {
                     the_post(); printf('Publicaciones de %s', esc_html(get_the_author())); rewind_posts();
                 } elseif (is_day() || is_month() || is_year()) {
-                    the_archive_title();
+                    echo esc_html(get_the_archive_title());
                 } else {
                     esc_html_e('Blog', 'colegio-ae');
                 }

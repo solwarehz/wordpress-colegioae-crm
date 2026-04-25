@@ -88,9 +88,55 @@ function colegio_ae_customizer_register_formularios(WP_Customize_Manager $wp_cus
 }
 
 /**
- * Sanitiza el código embed (permite iframe y script de tally.so).
+ * Sanitiza el código embed de Tally.
+ *
+ * Capa 1 — restringe los atributos `src` de <iframe> y <script> a hosts de
+ * tally.so antes de aplicar wp_kses. Aunque solo administradores guardan
+ * el embed, el output va al frontend público; esto previene que un admin
+ * comprometido o un copy-paste de código malicioso inyecte scripts de
+ * terceros en cada visitante.
+ *
+ * Capa 2 — wp_kses con allowlist estricta de tags/attrs.
  */
 function colegio_ae_sanitize_embed($input) {
+    $input = (string) $input;
+
+    // Capa 1a — Strip src de cualquier <iframe>/<script> cuyo host no sea tally.so.
+    $input = preg_replace_callback(
+        '#<(iframe|script)\b([^>]*?)\bsrc\s*=\s*(["\'])(.*?)\3([^>]*)>#i',
+        function ($m) {
+            $tag    = $m[1];
+            $before = $m[2];
+            $quote  = $m[3];
+            $url    = $m[4];
+            $after  = $m[5];
+
+            $allowed = (bool) preg_match('#^https?://(?:[\w-]+\.)?tally\.so/#i', trim($url));
+            if ($allowed) {
+                return "<{$tag}{$before}src={$quote}{$url}{$quote}{$after}>";
+            }
+            // Host no permitido: drop del atributo src completo.
+            return "<{$tag}{$before}{$after}>";
+        },
+        $input
+    );
+
+    // Capa 1b — Drop completo de cualquier <script>...</script> que no tenga
+    // src apuntando a tally.so. Esto cubre scripts inline (`<script>alert()</script>`)
+    // y scripts a los que ya les quitamos el src en la capa anterior. Tally
+    // nunca usa scripts inline; siempre es <script src="https://tally.so/...">.
+    $input = preg_replace_callback(
+        '#<script\b([^>]*)>(.*?)</script>#is',
+        function ($m) {
+            $attrs = $m[1];
+            if (preg_match('#\bsrc\s*=\s*(["\'])(https?://(?:[\w-]+\.)?tally\.so/[^"\']+)\1#i', $attrs)) {
+                return $m[0]; // Script de tally.so legítimo: lo dejamos.
+            }
+            return ''; // Script sin src tally → dropear tag completo.
+        },
+        $input
+    );
+
     $allowed = [
         'iframe' => [
             'src' => true, 'width' => true, 'height' => true, 'frameborder' => true,
