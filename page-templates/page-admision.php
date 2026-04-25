@@ -30,15 +30,23 @@ defined('ABSPATH') || exit;
     </a>
 
     <header class="admision-header">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="admision-logo-link" aria-label="<?php esc_attr_e('Volver al inicio', 'colegio-ae'); ?>">
+        <div class="admision-logo">
             <?php
-            if (has_custom_logo()) {
-                the_custom_logo();
+            // Logo sin link envolvente. En una landing de conversión, todo
+            // link representa una vía de escape del lead. Mantenemos el logo
+            // como elemento visual de marca/credibilidad, pero sin que el
+            // visitante pueda navegar al resto del sitio.
+            $logo_id = (int) get_theme_mod('custom_logo', 0);
+            if ($logo_id > 0) {
+                echo wp_get_attachment_image($logo_id, 'full', false, [
+                    'class' => 'custom-logo',
+                    'alt'   => get_bloginfo('name'),
+                ]);
             } else {
                 echo '<span class="admision-logo-text">' . esc_html(get_bloginfo('name')) . '</span>';
             }
             ?>
-        </a>
+        </div>
     </header>
 
     <main class="admision-main" id="main">
