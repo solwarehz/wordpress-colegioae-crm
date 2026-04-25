@@ -14,7 +14,7 @@ $autoplay = max(3000, (int) get_theme_mod('colegio_ae_profesores_autoplay', 4500
 $btn_text = (string) get_theme_mod('colegio_ae_profesores_btn_text', $d['profesores_btn_text']);
 $btn_url  = (string) get_theme_mod('colegio_ae_profesores_btn_url',  $d['profesores_btn_url']);
 
-$teachers = new WP_Query([
+$teacher_ids = colegio_ae_cached_post_ids('colegio_ae_home_profesores', [
     'post_type'      => 'page',
     'posts_per_page' => $count,
     'orderby'        => 'date',
@@ -25,6 +25,14 @@ $teachers = new WP_Query([
             'value' => 'page-templates/page-profesor.php',
         ],
     ],
+]);
+
+$teachers = new WP_Query([
+    'post_type'      => 'page',
+    'post__in'       => !empty($teacher_ids) ? $teacher_ids : [0],
+    'orderby'        => 'post__in',
+    'posts_per_page' => $count,
+    'no_found_rows'  => true,
 ]);
 ?>
 

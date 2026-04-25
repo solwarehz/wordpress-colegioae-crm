@@ -27,7 +27,15 @@ if (!empty($cats)) {
     $query_args['category_name'] = implode(',', $cats);
 }
 
-$posts_query = new WP_Query($query_args);
+$post_ids = colegio_ae_cached_post_ids('colegio_ae_home_mentalidad', $query_args);
+
+$posts_query = new WP_Query([
+    'post_type'      => 'post',
+    'post__in'       => !empty($post_ids) ? $post_ids : [0],
+    'orderby'        => 'post__in',
+    'posts_per_page' => $count,
+    'no_found_rows'  => true,
+]);
 ?>
 
 <section id="<?php echo esc_attr($anchor); ?>" class="section mentalidad">

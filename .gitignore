@@ -12,5 +12,3 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Fuentes no distribuidas (descargan manualmente por el dev — ver assets/fonts/README.md)
-assets/fonts/*.woff2

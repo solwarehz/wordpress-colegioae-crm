@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.5.3');
+define('COLEGIO_AE_VERSION', '0.6.0');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -152,6 +152,22 @@ function colegio_ae_enqueue_assets() {
         COLEGIO_AE_VERSION,
         true
     );
+
+    // Aplicar defer a todos los JS del tema. Están en footer y son
+    // independientes entre sí; defer permite que el navegador siga
+    // parseando el HTML sin bloquear y ejecuta los scripts en orden
+    // antes de DOMContentLoaded.
+    foreach ([
+        'colegio-ae-slider',
+        'colegio-ae-blog-carousel',
+        'colegio-ae-profesores-carousel',
+        'colegio-ae-scroll-reveal',
+        'colegio-ae-theme-toggle',
+        'colegio-ae-nav',
+        'colegio-ae-main',
+    ] as $handle) {
+        wp_script_add_data($handle, 'strategy', 'defer');
+    }
 }
 add_action('wp_enqueue_scripts', 'colegio_ae_enqueue_assets');
 
@@ -228,4 +244,5 @@ add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
  */
 require_once COLEGIO_AE_DIR . '/inc/social-nav-walker.php';
 require_once COLEGIO_AE_DIR . '/inc/disable-comments.php';
+require_once COLEGIO_AE_DIR . '/inc/cache.php';
 require_once COLEGIO_AE_DIR . '/inc/customizer.php';

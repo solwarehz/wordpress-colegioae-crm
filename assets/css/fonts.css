@@ -1,46 +1,24 @@
 /* ============================================================================
-   fonts.css — Self-hosted webfonts
-   Descargar los archivos .woff2 desde https://gwfh.mranftl.com/
-   y colocarlos en assets/fonts/ con los nombres indicados abajo.
-   Mientras no existan los archivos, el navegador cae a la fuente de sistema.
+   fonts.css — Self-hosted webfonts (variable fonts).
+   Open Sans cubre weights 300–800 desde un solo archivo.
+   Roboto cubre weights 100–900 desde un solo archivo.
+   Solo subset latin (suficiente para español/peruano).
    ============================================================================ */
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300 800;
     font-display: swap;
-    src: url('../fonts/open-sans-400.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url('../fonts/open-sans-600.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('../fonts/open-sans-700.woff2') format('woff2');
+    src: url('../fonts/open-sans.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 100 900;
     font-display: swap;
-    src: url('../fonts/roboto-400.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('../fonts/roboto-700.woff2') format('woff2');
+    src: url('../fonts/roboto.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
