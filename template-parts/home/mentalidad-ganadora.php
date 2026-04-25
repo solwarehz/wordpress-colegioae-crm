@@ -38,10 +38,10 @@ $posts_query = new WP_Query([
 ]);
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section mentalidad">
+<section id="<?php echo esc_attr($anchor); ?>" class="section mentalidad" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="mentalidad__header">
-            <h2 class="mentalidad__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="mentalidad__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($subtitle)) : ?>
                 <p class="mentalidad__subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>

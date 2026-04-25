@@ -38,10 +38,10 @@ for ($i = 1; $i <= 3; $i++) {
 if (empty($sedes)) return;
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section sedes">
+<section id="<?php echo esc_attr($anchor); ?>" class="section sedes" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="sedes__header">
-            <h2 class="sedes__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="sedes__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($intro)) : ?>
                 <p class="sedes__subtitle"><?php echo esc_html($intro); ?></p>
             <?php endif; ?>

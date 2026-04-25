@@ -46,7 +46,7 @@ $reclamaciones_form_id = absint(get_theme_mod('reclamaciones_fluentform_id', 2))
                 <?php
                 $fallback = '<div class="reclamaciones-page__notice">
                     <p><strong>Configura el formulario en Apariencia → Personalizar → Formularios (Tally).</strong></p>
-                    <p>Crea en <a href="https://tally.so" target="_blank" rel="noopener">tally.so</a> el formulario con los campos exigidos por Indecopi (tipo de documento, número, nombres y apellidos, domicilio, teléfono, email, tipo reclamo/queja, detalle del pedido, detalle del reclamo). Pega el código embed en el Customizer.</p>
+                    <p>Crea en <a href="https://tally.so" target="_blank" rel="noopener noreferrer">tally.so</a> el formulario con los campos exigidos por Indecopi (tipo de documento, número, nombres y apellidos, domicilio, teléfono, email, tipo reclamo/queja, detalle del pedido, detalle del reclamo). Pega el código embed en el Customizer.</p>
                 </div>';
                 colegio_ae_render_tally_embed('reclamaciones', $fallback);
                 ?>

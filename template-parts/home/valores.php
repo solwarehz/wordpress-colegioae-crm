@@ -38,10 +38,10 @@ for ($i = 1; $i <= 6; $i++) {
 if (empty($valores)) return;
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section valores">
+<section id="<?php echo esc_attr($anchor); ?>" class="section valores" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="valores__header">
-            <h2 class="valores__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="valores__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($subtitle)) : ?>
                 <p class="valores__subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>

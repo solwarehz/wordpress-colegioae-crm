@@ -36,10 +36,10 @@ $teachers = new WP_Query([
 ]);
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section profesores">
+<section id="<?php echo esc_attr($anchor); ?>" class="section profesores" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="profesores__header">
-            <h2 class="profesores__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="profesores__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($subtitle)) : ?>
                 <p class="profesores__subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>

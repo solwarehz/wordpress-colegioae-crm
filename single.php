@@ -34,7 +34,7 @@ get_header();
             <?php if (has_post_thumbnail()) : ?>
                 <div class="single-post__featured">
                     <div class="single-post__featured-image card-image">
-                        <?php the_post_thumbnail('ae-hero', ['loading' => 'eager']); ?>
+                        <?php the_post_thumbnail('ae-hero', ['loading' => 'eager', 'alt' => get_the_title()]); ?>
                     </div>
                 </div>
             <?php endif; ?>

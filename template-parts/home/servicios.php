@@ -27,10 +27,10 @@ for ($i = 1; $i <= 3; $i++) {
 if (empty($niveles)) return;
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section servicios">
+<section id="<?php echo esc_attr($anchor); ?>" class="section servicios" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="servicios__header">
-            <h2 class="servicios__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="servicios__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($subtitle)) : ?>
                 <p class="servicios__subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>

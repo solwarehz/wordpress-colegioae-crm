@@ -41,10 +41,10 @@ if (!function_exists('ae_render_stars')) {
 }
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section resenas">
+<section id="<?php echo esc_attr($anchor); ?>" class="section resenas" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container">
         <header class="resenas__header">
-            <h2 class="resenas__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="resenas__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($subtitle)) : ?>
                 <p class="resenas__subtitle"><?php echo esc_html($subtitle); ?></p>
             <?php endif; ?>

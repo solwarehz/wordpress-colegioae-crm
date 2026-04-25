@@ -22,10 +22,10 @@ if (!empty($video)) {
 }
 ?>
 
-<section id="<?php echo esc_attr($anchor); ?>" class="section nosotros">
+<section id="<?php echo esc_attr($anchor); ?>" class="section nosotros" aria-labelledby="<?php echo esc_attr($anchor); ?>-title">
     <div class="container nosotros__container">
         <div class="nosotros__text">
-            <h2 class="nosotros__title"><?php echo esc_html($title); ?></h2>
+            <h2 id="<?php echo esc_attr($anchor); ?>-title" class="nosotros__title"><?php echo esc_html($title); ?></h2>
             <?php if (!empty($p1)) : ?>
                 <p><?php echo esc_html($p1); ?></p>
             <?php endif; ?>

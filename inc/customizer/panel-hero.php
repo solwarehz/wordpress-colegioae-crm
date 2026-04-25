@@ -56,6 +56,7 @@ function colegio_ae_customizer_register_hero(WP_Customize_Manager $wp_customize)
     $slide_defaults = [
         1 => [
             'image' => 'https://picsum.photos/seed/ae-hero-1/1920/1080',
+            'alt'   => 'Estudiantes del Colegio Albert Einstein en clase',
             'title' => 'Formamos líderes del mañana',
             'subtitle' => 'Con pensamiento crítico, valores sólidos y visión global',
             'cta_text' => 'Agenda una visita',
@@ -63,6 +64,7 @@ function colegio_ae_customizer_register_hero(WP_Customize_Manager $wp_customize)
         ],
         2 => [
             'image' => 'https://picsum.photos/seed/ae-hero-2/1920/1080',
+            'alt'   => 'Aulas modernas y espacios de aprendizaje del colegio',
             'title' => 'Educación que transforma',
             'subtitle' => 'Donde cada niño descubre su potencial y aprende a confiar en él',
             'cta_text' => 'Conoce nuestra propuesta',
@@ -70,13 +72,14 @@ function colegio_ae_customizer_register_hero(WP_Customize_Manager $wp_customize)
         ],
         3 => [
             'image' => 'https://picsum.photos/seed/ae-hero-3/1920/1080',
+            'alt'   => 'Comunidad escolar del Colegio Albert Einstein',
             'title' => 'Más que un colegio, una familia',
             'subtitle' => 'Compromiso, respeto y excelencia que acompañan a tu hijo cada día',
             'cta_text' => 'Escríbenos',
             'cta_url'  => '#contacto',
         ],
-        4 => ['image' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''],
-        5 => ['image' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''],
+        4 => ['image' => '', 'alt' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''],
+        5 => ['image' => '', 'alt' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''],
     ];
 
     $priority = 20;
@@ -91,6 +94,17 @@ function colegio_ae_customizer_register_hero(WP_Customize_Manager $wp_customize)
             'label' => sprintf(__('Slide %d — Imagen', 'colegio-ae'), $i),
             'section' => 'colegio_ae_section_hero', 'priority' => $priority++,
         ]));
+
+        // Texto alternativo (accesibilidad / SEO)
+        $id = "colegio_ae_hero_slide_{$i}_alt";
+        $wp_customize->add_setting($id, [
+            'default' => $d['alt'], 'type' => 'theme_mod', 'sanitize_callback' => 'sanitize_text_field',
+        ]);
+        $wp_customize->add_control($id, [
+            'label' => sprintf(__('Slide %d — Texto alternativo (alt)', 'colegio-ae'), $i),
+            'description' => __('Describe la imagen para personas con discapacidad visual y para Google. Ej: "Estudiantes en el patio del colegio". Si lo dejas vacío, la imagen se trata como decorativa.', 'colegio-ae'),
+            'section' => 'colegio_ae_section_hero', 'type' => 'text', 'priority' => $priority++,
+        ]);
 
         // Título
         $id = "colegio_ae_hero_slide_{$i}_title";

@@ -11,13 +11,14 @@ $defaults = colegio_ae_defaults()['hero_slides'];
 
 $slides = [];
 for ($i = 1; $i <= 5; $i++) {
-    $d = $defaults[$i] ?? ['image' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => ''];
+    $d = $defaults[$i] ?? ['image' => '', 'title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => '', 'alt' => ''];
     $title    = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_title",    $d['title']);
     $subtitle = (string) get_theme_mod("colegio_ae_hero_slide_{$i}_subtitle", $d['subtitle']);
     if ($title === '' && $subtitle === '') continue;
 
     $slides[] = [
         'image'    => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_image",    $d['image']),
+        'alt'      => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_alt",      $d['alt'] ?? ''),
         'title'    => $title,
         'subtitle' => $subtitle,
         'cta_text' => (string) get_theme_mod("colegio_ae_hero_slide_{$i}_cta_text", $d['cta_text']),
@@ -40,7 +41,7 @@ if (empty($slides)) return;
                     <?php if (!empty($slide['image'])) : ?>
                         <div class="hero__image card-image">
                             <?php echo colegio_ae_render_image($slide['image'], 'ae-hero', [
-                                'alt'         => '',
+                                'alt'         => $slide['alt'],
                                 'loading'     => $i === 0 ? 'eager' : 'lazy',
                                 'decoding'    => 'async',
                                 'fetchpriority' => $i === 0 ? 'high' : 'auto',
@@ -50,7 +51,12 @@ if (empty($slides)) return;
                     <div class="hero__overlay"></div>
                     <div class="hero__content">
                         <div class="container">
-                            <h1 class="hero__title"><?php echo esc_html($slide['title']); ?></h1>
+                            <?php
+                            // Solo el primer slide es <h1> (el principal de la página).
+                            // Los demás son <h2> para mantener una jerarquía única.
+                            $heading_tag = $i === 0 ? 'h1' : 'h2';
+                            ?>
+                            <<?php echo $heading_tag; ?> class="hero__title"><?php echo esc_html($slide['title']); ?></<?php echo $heading_tag; ?>>
                             <?php if (!empty($slide['subtitle'])) : ?>
                                 <p class="hero__subtitle"><?php echo esc_html($slide['subtitle']); ?></p>
                             <?php endif; ?>
