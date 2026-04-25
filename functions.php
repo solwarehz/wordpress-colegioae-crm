@@ -5,7 +5,22 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.8.2');
+define('COLEGIO_AE_VERSION', '0.8.3');
+
+/**
+ * COLEGIO_AE_DIR / COLEGIO_AE_URI apuntan al directorio del tema padre
+ * (no al stylesheet). Esto es intencional:
+ *
+ * - Se usan para require_once de includes en /inc/, que siempre viven en
+ *   el tema padre. Si las apuntara al stylesheet, un child theme que no
+ *   replique esos archivos rompería los includes.
+ * - Para assets que sí pueden override desde un child theme (CSS, JS,
+ *   imágenes, SVGs), usar get_theme_file_uri() / get_theme_file_path()
+ *   directamente — esas funciones resuelven child → padre.
+ *
+ * El nombre real de la carpeta del tema es independiente de estas
+ * constantes: WordPress lo resuelve dinámicamente vía get_template_directory().
+ */
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 

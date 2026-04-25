@@ -46,10 +46,16 @@ class Colegio_AE_Social_Walker extends Walker_Nav_Menu {
 
     /**
      * Lee el SVG de assets/icons/<red>.svg y lo devuelve inline.
-     * Fallback: texto simple si el archivo no existe.
+     *
+     * Usa get_theme_file_path() (WP 4.7+) que resuelve dinámicamente:
+     * busca primero en el child theme activo, y cae al template padre
+     * si el archivo no existe en el child. Esto permite que un child
+     * theme futuro override iconos individuales sin tocar este walker.
+     *
+     * Fallback: texto simple si el archivo no existe en ninguno de los dos.
      */
     private static function get_svg_icon($name) {
-        $path = get_template_directory() . '/assets/icons/' . $name . '.svg';
+        $path = get_theme_file_path('assets/icons/' . $name . '.svg');
         if (file_exists($path)) {
             $svg = file_get_contents($path);
             return $svg !== false ? $svg : '<span>' . esc_html($name) . '</span>';
