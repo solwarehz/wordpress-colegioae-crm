@@ -83,6 +83,12 @@
     font-size: clamp(var(--fs-3xl), 5vw, var(--fs-5xl));
     max-width: 24ch;
     margin-bottom: var(--space-4);
+    /* Override de la regla global h2 { text-transform: uppercase } de
+       base.css. En el hero queremos respetar la capitalización que
+       genera colegio_ae_sentence_case() en PHP — sentence case, no
+       todo mayúsculas. Aplica también a h1 (no daña). */
+    text-transform: none;
+    letter-spacing: normal;
     /* Truncar a 4 líneas máximo. 24ch x 4 = ~96 caracteres, holgado
        para títulos como "Preparamos para ganar, formamos para no
        rendirse" sin cortar palabras. Si el cliente pega un título
