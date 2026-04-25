@@ -56,9 +56,9 @@ if (empty($slides)) return;
                             // Los demás son <h2> para mantener una jerarquía única.
                             $heading_tag = $i === 0 ? 'h1' : 'h2';
                             ?>
-                            <<?php echo $heading_tag; ?> class="hero__title"><?php echo esc_html($slide['title']); ?></<?php echo $heading_tag; ?>>
+                            <<?php echo $heading_tag; ?> class="hero__title"><?php echo esc_html(colegio_ae_sentence_case($slide['title'])); ?></<?php echo $heading_tag; ?>>
                             <?php if (!empty($slide['subtitle'])) : ?>
-                                <p class="hero__subtitle"><?php echo esc_html($slide['subtitle']); ?></p>
+                                <p class="hero__subtitle"><?php echo esc_html(colegio_ae_sentence_case($slide['subtitle'])); ?></p>
                             <?php endif; ?>
                             <?php if (!empty($slide['cta_text']) && !empty($cta_url)) : ?>
                                 <a href="<?php echo esc_url($cta_url); ?>" class="btn btn--primary hero__cta"><?php echo esc_html($slide['cta_text']); ?></a>

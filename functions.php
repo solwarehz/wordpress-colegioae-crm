@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.8.3');
+define('COLEGIO_AE_VERSION', '0.8.4');
 
 /**
  * COLEGIO_AE_DIR / COLEGIO_AE_URI apuntan al directorio del tema padre
@@ -270,6 +270,38 @@ function colegio_ae_fix_home_menu_items($items, $args) {
     return $items;
 }
 add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
+
+/**
+ * Normaliza un texto a "sentence case" — formato consistente sin importar
+ * cómo el cliente haya escrito el título en el Customizer.
+ *
+ * Reglas:
+ *  - Todo a minúsculas
+ *  - Primera letra del texto en mayúscula
+ *  - Primera letra después de "punto + espacio" en mayúscula
+ *
+ * Ejemplos:
+ *  "FORMAMOS LÍDERES"        → "Formamos líderes"
+ *  "formamos líderes"         → "Formamos líderes"
+ *  "AQUÍ. APRENDEMOS."        → "Aquí. Aprendemos."
+ *
+ * Nota: aplicar en PHP (no solo CSS) deja el HTML semántico correcto
+ * para Google y lectores de pantalla, no solo la presentación visual.
+ */
+function colegio_ae_sentence_case($text) {
+    $text = mb_strtolower(trim((string) $text), 'UTF-8');
+    if ($text === '') {
+        return '';
+    }
+    // Primera letra del texto en mayúscula
+    $first = mb_strtoupper(mb_substr($text, 0, 1, 'UTF-8'), 'UTF-8');
+    $rest  = mb_substr($text, 1, null, 'UTF-8');
+    $text  = $first . $rest;
+    // Capitalizar primera letra después de "punto + espacio"
+    return preg_replace_callback('/(\.\s+)(\p{L})/u', function ($m) {
+        return $m[1] . mb_strtoupper($m[2], 'UTF-8');
+    }, $text);
+}
 
 /**
  * Includes.

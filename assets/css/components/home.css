@@ -83,6 +83,13 @@
     font-size: clamp(var(--fs-3xl), 5vw, var(--fs-5xl));
     max-width: 18ch;
     margin-bottom: var(--space-4);
+    /* Truncar a 3 líneas máximo para que un título largo no empuje
+       el subtítulo y el CTA fuera del slide. Agrega "…" al final si
+       el texto excede. */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .hero__subtitle {
@@ -90,11 +97,20 @@
     font-size: clamp(var(--fs-md), 2vw, var(--fs-xl));
     max-width: 42ch;
     margin-bottom: var(--space-6);
+    /* Truncar a 4 líneas máximo. */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .hero__cta {
     font-size: var(--fs-md);
     padding: var(--space-4) var(--space-8);
+    /* CTA del hero siempre en mayúsculas, con tracking ligero para
+       compensar el peso visual de las versales. */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .hero__arrow {
