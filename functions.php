@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.8.1');
+define('COLEGIO_AE_VERSION', '0.8.2');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 

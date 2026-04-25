@@ -74,9 +74,14 @@ function colegio_ae_doc_icon($mime) {
                                 <?php endif; ?>
                             </div>
                             <?php if ($has_file) : ?>
-                                <a href="<?php echo esc_url($doc['url']); ?>" class="btn btn--secondary documento-item__cta" target="_blank" rel="noopener noreferrer" download>
-                                    <?php esc_html_e('Descargar', 'colegio-ae'); ?>
-                                </a>
+                                <div class="documento-item__actions">
+                                    <a href="<?php echo esc_url($doc['url']); ?>" class="btn btn--secondary documento-item__cta" target="_blank" rel="noopener noreferrer">
+                                        <?php esc_html_e('Ver', 'colegio-ae'); ?>
+                                    </a>
+                                    <a href="<?php echo esc_url($doc['url']); ?>" class="btn btn--primary documento-item__cta" rel="noopener" download>
+                                        <?php esc_html_e('Descargar', 'colegio-ae'); ?>
+                                    </a>
+                                </div>
                             <?php else : ?>
                                 <span class="documento-item__cta documento-item__cta--disabled" aria-disabled="true">
                                     <?php esc_html_e('Próximamente', 'colegio-ae'); ?>
