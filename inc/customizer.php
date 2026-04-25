@@ -157,13 +157,32 @@ function colegio_ae_sanitize_embed($input) {
 
 /**
  * Helper: imprime el embed guardado para una key dada, o un fallback.
+ *
+ * Si el embed usa el patrón `data-tally-src` (modo "iframe only" de Tally,
+ * el más común al copiar desde Share → Embed), también emite el script
+ * `widgets/embed.js` que Tally necesita para activar el iframe. El script
+ * se imprime solo una vez por request aunque haya múltiples embeds.
+ *
+ * El sanitize_callback (`colegio_ae_sanitize_embed`) ya valida el embed
+ * pegado por el cliente; el script que añadimos aquí es hardcoded a
+ * tally.so y no depende del input del usuario.
  */
 function colegio_ae_render_tally_embed($key, $fallback_html = '') {
+    static $script_printed = false;
+
     $code = get_theme_mod('colegio_ae_tally_' . $key, '');
-    if (!empty($code)) {
-        echo $code;
-    } else {
+    if (empty($code)) {
         echo $fallback_html;
+        return;
+    }
+
+    echo $code;
+
+    // Si el embed depende de data-tally-src, asegurar que el activador
+    // de Tally esté presente. Solo lo imprimimos una vez por request.
+    if (!$script_printed && stripos($code, 'data-tally-src') !== false) {
+        echo "\n" . '<script async src="https://tally.so/widgets/embed.js"></script>' . "\n";
+        $script_printed = true;
     }
 }
 
