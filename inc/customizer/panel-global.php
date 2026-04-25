@@ -116,6 +116,37 @@ function colegio_ae_customizer_register_global(WP_Customize_Manager $wp_customiz
         'type'        => 'textarea',
         'priority'    => 55,
     ]);
+
+    /* =====================================================================
+       SEO — Imagen y descripción para redes sociales (Open Graph)
+       ===================================================================== */
+    $wp_customize->add_setting('colegio_ae_seo_social_image', [
+        'default'           => 0,
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'absint',
+        'capability'        => 'edit_theme_options',
+    ]);
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'colegio_ae_seo_social_image', [
+        'label'       => __('Imagen para redes sociales (Open Graph)', 'colegio-ae'),
+        'description' => __('Se muestra cuando alguien comparte el link en WhatsApp, Facebook, etc. Recomendado: 1200×630 px. WordPress recortará automáticamente la imagen al subirla. Si una página tiene imagen destacada propia, esa tiene prioridad sobre esta.', 'colegio-ae'),
+        'section'     => 'colegio_ae_global',
+        'mime_type'   => 'image',
+        'priority'    => 60,
+    ]));
+
+    $wp_customize->add_setting('colegio_ae_seo_site_description', [
+        'default'           => 'Formamos estudiantes líderes con pensamiento crítico, valores sólidos y excelencia académica. Tres sedes en Huaraz.',
+        'type'              => 'theme_mod',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'capability'        => 'edit_theme_options',
+    ]);
+    $wp_customize->add_control('colegio_ae_seo_site_description', [
+        'label'       => __('Descripción del sitio para Google y redes sociales', 'colegio-ae'),
+        'description' => __('Texto que Google muestra debajo del título en sus resultados. Aparece en la home y en archivos del blog. Ideal: entre 120 y 160 caracteres.', 'colegio-ae'),
+        'section'     => 'colegio_ae_global',
+        'type'        => 'textarea',
+        'priority'    => 65,
+    ]);
 }
 
 /* ==========================================================================

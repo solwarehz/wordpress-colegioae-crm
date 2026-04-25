@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.6.1');
+define('COLEGIO_AE_VERSION', '0.7.0');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -45,6 +45,12 @@ function colegio_ae_setup() {
     add_image_size('ae-card-square', 600, 600, true);
     add_image_size('ae-card-portrait', 600, 800, true);
     add_image_size('ae-blog-featured', 1200, 675, true);
+
+    // Imagen Open Graph: 1200x630 con crop centrado. La proporción 1.91:1
+    // es la que recomiendan Facebook, WhatsApp, LinkedIn y Twitter Cards.
+    // WordPress genera esta variante automáticamente al subir cualquier
+    // imagen — el cliente no tiene que recortar a mano.
+    add_image_size('ae-og', 1200, 630, true);
 }
 add_action('after_setup_theme', 'colegio_ae_setup');
 
@@ -256,4 +262,5 @@ add_filter('wp_nav_menu_objects', 'colegio_ae_fix_home_menu_items', 10, 2);
 require_once COLEGIO_AE_DIR . '/inc/social-nav-walker.php';
 require_once COLEGIO_AE_DIR . '/inc/disable-comments.php';
 require_once COLEGIO_AE_DIR . '/inc/cache.php';
+require_once COLEGIO_AE_DIR . '/inc/seo.php';
 require_once COLEGIO_AE_DIR . '/inc/customizer.php';
