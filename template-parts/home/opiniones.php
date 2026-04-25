@@ -59,7 +59,11 @@ if (!function_exists('ae_render_stars')) {
                     <footer class="opinion-card__footer">
                         <?php if (!empty($r['photo'])) : ?>
                             <div class="opinion-card__avatar card-image">
-                                <img src="<?php echo esc_url($r['photo']); ?>" alt="<?php echo esc_attr($r['name']); ?>" loading="lazy">
+                                <?php echo colegio_ae_render_image($r['photo'], 'ae-card-square', [
+                                    'alt'      => 'Foto de ' . $r['name'],
+                                    'loading'  => 'lazy',
+                                    'decoding' => 'async',
+                                ]); ?>
                             </div>
                         <?php endif; ?>
                         <div class="opinion-card__person">

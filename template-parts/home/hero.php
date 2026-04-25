@@ -39,7 +39,12 @@ if (empty($slides)) return;
                 <article class="hero__slide<?php echo $i === 0 ? ' hero__slide--active' : ''; ?>" aria-hidden="<?php echo $i === 0 ? 'false' : 'true'; ?>">
                     <?php if (!empty($slide['image'])) : ?>
                         <div class="hero__image card-image">
-                            <img src="<?php echo esc_url($slide['image']); ?>" alt="" loading="<?php echo $i === 0 ? 'eager' : 'lazy'; ?>">
+                            <?php echo colegio_ae_render_image($slide['image'], 'ae-hero', [
+                                'alt'         => '',
+                                'loading'     => $i === 0 ? 'eager' : 'lazy',
+                                'decoding'    => 'async',
+                                'fetchpriority' => $i === 0 ? 'high' : 'auto',
+                            ]); ?>
                         </div>
                     <?php endif; ?>
                     <div class="hero__overlay"></div>

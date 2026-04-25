@@ -44,7 +44,11 @@ if (empty($niveles)) return;
                 <<?php echo $tag; ?> class="nivel-card"<?php echo $href_attr; ?>>
                     <?php if (!empty($n['image'])) : ?>
                         <div class="nivel-card__image card-image">
-                            <img src="<?php echo esc_url($n['image']); ?>" alt="<?php echo esc_attr('Nivel ' . $n['name']); ?>" loading="lazy">
+                            <?php echo colegio_ae_render_image($n['image'], 'ae-card', [
+                                'alt'      => 'Nivel ' . $n['name'],
+                                'loading'  => 'lazy',
+                                'decoding' => 'async',
+                            ]); ?>
                         </div>
                     <?php endif; ?>
                     <div class="nivel-card__body">

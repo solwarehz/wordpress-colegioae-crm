@@ -577,15 +577,7 @@
     .profesores__arrow--next { right: 4px; }
 }
 
-.profesor-card__link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-
-.profesor-card__link:hover {
-    text-decoration: none;
-}
+/* __link y __placeholder se definen en cards.css (compartidos con archive). */
 
 .profesor-card__image {
     aspect-ratio: 1 / 1;
@@ -596,12 +588,6 @@
 .profesor-card__link:hover .profesor-card__image {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
-}
-
-.profesor-card__placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 }
 
 .profesor-card__name {

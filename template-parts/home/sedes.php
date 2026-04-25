@@ -71,7 +71,11 @@ if (empty($sedes)) return;
                             <?php foreach ($sede['niveles'] as $n) : ?>
                                 <figure class="sede-block__photo">
                                     <div class="card-image">
-                                        <img src="<?php echo esc_url($n['image']); ?>" alt="<?php echo esc_attr($sede['name'] . ' – ' . $n['name']); ?>" loading="lazy">
+                                        <?php echo colegio_ae_render_image($n['image'], 'ae-card', [
+                                            'alt'      => $sede['name'] . ' – ' . $n['name'],
+                                            'loading'  => 'lazy',
+                                            'decoding' => 'async',
+                                        ]); ?>
                                     </div>
                                     <figcaption><?php echo esc_html($n['name']); ?></figcaption>
                                 </figure>

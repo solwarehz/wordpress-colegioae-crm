@@ -632,30 +632,10 @@
     }
 }
 
-/* -------- Profesor card (compartido entre home y archive) -------- */
-.profesor-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-
-.profesor-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-secondary);
-}
-
-.profesor-card__link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-
-.profesor-card__link:hover {
-    text-decoration: none;
-}
+/* -------- Profesor card (grid del archive) --------
+   Los estilos base de .profesor-card y .profesor-card__{link,placeholder}
+   viven en cards.css, que se carga siempre. Aquí solo los overrides del
+   grid del archivo de profesores. */
 
 /* Imagen más alta (aspect 4/5 vertical) — cards más prominentes */
 .profesor-card__image {
@@ -671,12 +651,6 @@
 
 .profesor-card:hover .profesor-card__image img {
     transform: scale(1.05);
-}
-
-.profesor-card__placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 }
 
 .profesor-card__name {

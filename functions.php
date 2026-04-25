@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-define('COLEGIO_AE_VERSION', '0.6.0');
+define('COLEGIO_AE_VERSION', '0.6.1');
 define('COLEGIO_AE_DIR', get_template_directory());
 define('COLEGIO_AE_URI', get_template_directory_uri());
 
@@ -120,14 +120,25 @@ function colegio_ae_enqueue_assets() {
         true
     );
 
-    // CSS común para páginas secundarias — cargado en TODAS las vistas porque
-    // contiene estilos compartidos (profesor-card, post-card) que también usa el home.
+    // Cards base (.profesor-card) — compartido entre home (carrusel) y
+    // archive (/profesores/). Se carga siempre porque pesa poco (~600 B).
     wp_enqueue_style(
-        'colegio-ae-pages',
-        COLEGIO_AE_URI . '/assets/css/components/pages.css',
+        'colegio-ae-cards',
+        COLEGIO_AE_URI . '/assets/css/components/cards.css',
         ['colegio-ae-base'],
         COLEGIO_AE_VERSION
     );
+
+    // CSS de páginas secundarias — solo cuando NO estamos en home. Esto
+    // ahorra ~18 KB de CSS bloqueante en la vista más vista del sitio.
+    if (!is_front_page()) {
+        wp_enqueue_style(
+            'colegio-ae-pages',
+            COLEGIO_AE_URI . '/assets/css/components/pages.css',
+            ['colegio-ae-base'],
+            COLEGIO_AE_VERSION
+        );
+    }
 
     wp_enqueue_script(
         'colegio-ae-theme-toggle',
