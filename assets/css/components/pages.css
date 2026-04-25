@@ -2,12 +2,45 @@
    pages.css — Estilos de páginas secundarias:
    - Página genérica (políticas, etc.)
    - Archivo del blog + filtros + paginación
+   - Resultados de búsqueda
    - Artículo single del blog
    - Libro de reclamaciones
    - Documentos
    - Listado de profesores (archivo)
    - Perfil individual de profesor
    ============================================================================ */
+
+/* -------- Search form (en search.php) -------- */
+.search-form {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+}
+
+.search-form input[type="search"] {
+    flex: 1;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-form input[type="search"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.15);
+}
+
+@media (max-width: 540px) {
+    .search-form {
+        flex-direction: column;
+    }
+}
 
 /* -------- Generic page (page.php) -------- */
 .generic-page__header {
