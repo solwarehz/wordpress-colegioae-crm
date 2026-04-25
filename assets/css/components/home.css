@@ -81,13 +81,14 @@
 .hero__title {
     color: #ffffff;
     font-size: clamp(var(--fs-3xl), 5vw, var(--fs-5xl));
-    max-width: 18ch;
+    max-width: 24ch;
     margin-bottom: var(--space-4);
-    /* Truncar a 3 líneas máximo para que un título largo no empuje
-       el subtítulo y el CTA fuera del slide. Agrega "…" al final si
-       el texto excede. */
+    /* Truncar a 4 líneas máximo. 24ch x 4 = ~96 caracteres, holgado
+       para títulos como "Preparamos para ganar, formamos para no
+       rendirse" sin cortar palabras. Si el cliente pega un título
+       muy largo, se trunca con "…" y el CTA se mantiene en su lugar. */
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
