@@ -89,6 +89,13 @@
        todo mayúsculas. Aplica también a h1 (no daña). */
     text-transform: none;
     letter-spacing: normal;
+    /* Sombra de doble capa para separar visualmente el título del
+       fondo de la imagen sin volverlo agresivo. Capa 1 cercana (más
+       definida) + capa 2 lejana (más difusa) = sensación de elevación.
+       Mejora legibilidad cuando la imagen del slide tiene zonas claras. */
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        0 6px 18px rgba(0, 0, 0, 0.35);
     /* Truncar a 4 líneas máximo. 24ch x 4 = ~96 caracteres, holgado
        para títulos como "Preparamos para ganar, formamos para no
        rendirse" sin cortar palabras. Si el cliente pega un título
@@ -104,6 +111,9 @@
     font-size: clamp(var(--fs-md), 2vw, var(--fs-xl));
     max-width: 42ch;
     margin-bottom: var(--space-6);
+    /* Sombra más sutil que el título — el subtítulo es texto pequeño
+       y abundante, una sombra fuerte lo haría pesado. */
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
     /* Truncar a 4 líneas máximo. */
     display: -webkit-box;
     -webkit-line-clamp: 4;
